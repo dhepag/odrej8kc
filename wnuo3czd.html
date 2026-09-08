@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A→B→C / B→D Arrow Diagram</title>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  h2 { color: #222; margin-bottom: 8px; font-size: 32px; }
+  p.sub { color: #666; margin-top: 0; font-size: 20px; }
+
+  .stage {
+    position: relative;
+    width: 1280px;
+    height: 780px;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .node {
+    position: absolute;
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    background: #2563eb;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 36px;
+    box-shadow: 0 2px 6px rgba(37,99,235,0.35);
+  }
+  #nodeA { top: 110px; left: 20px; width: 192px; height: 192px; font-size: 24px; text-align: center; line-height: 1.2; padding: 8px; }
+  #nodeB { top: 110px; left: 528px; width: 192px; height: 192px; font-size: 24px; text-align: center; line-height: 1.2; padding: 8px; }
+  #nodeC { top: 110px; left: 1016px; width: 192px; height: 192px; font-size: 24px; text-align: center; line-height: 1.2; padding: 8px; }
+  #nodeD { top: 506px; left: 514px; width: 220px; height: 220px; font-size: 20px; text-align: center; line-height: 1.2; padding: 8px; background:#16a34a; box-shadow: 0 2px 6px rgba(22,163,74,0.35); }
+
+  svg { position: absolute; top: 0; left: 0; }
+
+  .slider-wrap {
+    position: absolute;
+    top: 10px;
+    left: 700px;
+    width: 300px;
+    text-align: center;
+  }
+  .slider-wrap label {
+    font-size: 32px;
+    color: #555;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+
+  .bc_catalyst {
+    position: absolute;
+    top: 120px;
+    left: 640px;
+    width: 320px;
+    text-align: center;
+  }
+
+  .bc_catalyst label {
+    font-size: 52px;
+    font-weight: 600;
+    color: #555;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .titler label {
+    font-size: 52px;
+    font-weight: 600;
+    color: #555;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+
+  input[type=range] {
+    width: 320px;
+  }
+
+  .readout {
+    margin-top: 18px;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    gap: 24px;
+  }
+  .readout span.label { font-weight: 600; }
+  .swatch {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 2px;
+    margin-right: 6px;
+  }
+</style>
+</head>
+<body>
+
+
+<div class="titler">
+  <label for="titler">Attardi model</label>
+</div>
+
+
+<p class="sub">Drag the slider to shift emphasis between the B→C and B→D paths.</p>
+
+<div class="stage">
+  <svg width="1280" height="1040">
+    <defs>
+      <marker id="arrowC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.66" markerHeight="6.66" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#2563eb"></path>
+      </marker>
+      <marker id="arrowD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.66" markerHeight="6.66" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#16a34a"></path>
+      </marker>
+      <marker id="arrowAB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.66" markerHeight="6.66" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#444"></path>
+      </marker>
+    </defs>
+
+    <!-- A -> B (fixed width) -->
+    <line id="lineAB" x1="212" y1="200" x2="528" y2="200"
+          stroke="#444" stroke-width="12" marker-end="url(#arrowAB)"></line>
+
+    <!-- B -> C (variable width) -->
+    <line id="lineBC" x1="720" y1="200" x2="1016" y2="200"
+          stroke="#2563eb" stroke-width="12" marker-end="url(#arrowC)"></line>
+
+    <!-- B -> D (variable width) -->
+    <line id="lineBD" x1="624" y1="296" x2="624" y2="500"
+          stroke="#16a34a" stroke-width="12" marker-end="url(#arrowD)"></line>
+  </svg>
+
+  <div class="node" id="nodeA">Pre-beta cells</div>
+  <div class="node" id="nodeB">Meta-beta cells</div>
+  <div class="node" id="nodeC">Mature beta cells</div>
+  <div class="node" id="nodeD">Fibrotic/Cancer/Apoptotic cells</div>
+
+  <div class="slider-wrap">
+    <label for="slider">Levels of p53</label>
+    <input type="range" id="slider" min="0" max="100" value="50">
+  </div>
+
+  <div class="bc_catalyst">
+    <label for="bc_catalyst">p53</label>
+  </div>
+
+</div>
+
+<script>
+  const slider = document.getElementById('slider');
+  const lineBC = document.getElementById('lineBC');
+  const lineBD = document.getElementById('lineBD');
+
+  const MIN_W = 4;   // thinnest an arrow can get
+  const MAX_W = 36;  // thickest an arrow can get
+
+  function update() {
+    const t = Number(slider.value) / 100; // 0 (full left) -> 1 (full right)
+
+    // Left = thinner B->C, thicker B->D
+    // Right = thicker B->C, thinner B->D
+    const widthC = MIN_W + t * (MAX_W - MIN_W);
+    const widthD = MAX_W - t * (MAX_W - MIN_W);
+
+    lineBC.setAttribute('stroke-width', widthC.toFixed(1));
+    lineBD.setAttribute('stroke-width', widthD.toFixed(1));
+  }
+
+  slider.addEventListener('input', update);
+  update();
+</script>
+
+</body>
+</html>
