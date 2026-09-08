@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structural and Chemical Biology Center - DFCI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .red-header {
+            background-color: #2E2E2E;
+            color: white;
+            text-align: center;
+            padding: 8px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .main-header {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 280px;
+            height: 80px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .department-title {
+            color: #333;
+        }
+
+        .department-title h1 {
+            font-size: 28px;
+            font-weight: normal;
+            margin-bottom: 5px;
+            color: #2c2c2c;
+        }
+
+        .department-title h2 {
+            font-size: 28px;
+            font-weight: normal;
+            color: #2c2c2c;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-item {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item:hover {
+            color: #e21833;
+        }
+
+        .nav-item::after {
+            content: "▼";
+            font-size: 8px;
+            margin-left: 5px;
+            color: #999;
+        }
+
+        .search-icon {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            background-color: #666;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat center;
+            mask-size: contain;
+        }
+
+        .search-icon:hover {
+            background-color: #e21833;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 400px;
+            background-image: url('kenykzek.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .navigation {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .hero-content {
+                padding: 20px;
+                margin: 0 10px;
+            }
+
+            .hero-content h1 {
+                font-size: 28px;
+            }
+
+            .department-title h1,
+            .department-title h2 {
+                font-size: 20px;
+            }
+        }
+
+        /* Conference room table effect */
+        .hero-image::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 60px;
+            background: linear-gradient(to right, transparent, rgba(139, 69, 19, 0.3), transparent);
+            border-radius: 50px;
+        }
+
+        .blue-footer {
+            background-color: #2E2E2E;
+            padding: 10px;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .social-link {
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-link:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .social-links {
+                gap: 20px;
+            }
+            
+            .social-link {
+                font-size: 20px;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="red-header">
+        Structural and Chemical Biology Center
+    </div>
+    
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">
+                    <img src="q9ejeufe.svg" alt="University of Maryland Logo">
+                </div>
+            </div>
+            
+            <nav class="navigation">
+                <a href="#" class="nav-item">About</a>
+                <a href="#" class="nav-item">People</a>
+                <a href="#" class="nav-item">Research</a>
+                <a href="#" class="nav-item">Graduate</a>
+                <a href="#" class="nav-item">Undergraduate</a>
+                <a href="#" class="nav-item">News & Events</a>
+                <div class="search-icon"></div>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="hero-image"></div>
+
+    <footer class="blue-footer">
+        <div class="social-links">
+            <a href="#" class="social-link">in</a>
+            <a href="#" class="social-link">f</a>
+            <a href="#" class="social-link">𝕏</a>
+            <a href="#" class="social-link">○</a>
+            <a href="#" class="social-link">▶</a>
+        </div>
+    </footer>
+
+</body>
+</html>
