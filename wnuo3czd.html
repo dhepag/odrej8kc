@@ -100,13 +100,13 @@
       <svg id="diagram" viewBox="0 0 1280 820" class="w-full h-auto max-w-full block">
         <defs>
           <marker id="arrowC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.6" markerHeight="6.6" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 z" fill="#2563eb" />
+            <path d="M0,0 L10,5 L0,10 z" fill="#3b3b3b" />
           </marker>
           <marker id="arrowD" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.6" markerHeight="6.6" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 z" fill="#16a34a" />
+            <path d="M0,0 L10,5 L0,10 z" fill="#3b3b3b" />
           </marker>
           <marker id="arrowAB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6.6" markerHeight="6.6" orient="auto-start-reverse">
-            <path d="M0,0 L10,5 L0,10 z" fill="#4b5563" />
+            <path d="M0,0 L10,5 L0,10 z" fill="#3b3b3b" />
           </marker>
         </defs>
 
@@ -114,10 +114,10 @@
         <line id="lineAB" x1="212" y1="200" x2="528" y2="200" stroke="#4b5563" stroke-width="12" stroke-linecap="round" marker-end="url(#arrowAB)" />
 
         <!-- Dynamic line B -> C -->
-        <line id="lineBC" x1="720" y1="200" x2="1016" y2="200" stroke="#2563eb" stroke-width="12" stroke-linecap="round" marker-end="url(#arrowC)" />
+        <line id="lineBC" x1="720" y1="200" x2="1016" y2="200" stroke="#4b5563" stroke-width="12" stroke-linecap="round" marker-end="url(#arrowC)" />
 
         <!-- Dynamic line B -> D -->
-        <line id="lineBD" x1="624" y1="296" x2="624" y2="500" stroke="#16a34a" stroke-width="12" stroke-linecap="round" marker-end="url(#arrowD)" />
+        <line id="lineBD" x1="624" y1="296" x2="624" y2="500" stroke="#4b5563" stroke-width="12" stroke-linecap="round" marker-end="url(#arrowD)" />
 
         <!-- Dynamic label overlay near B->C pathway -->
         <text x="828" y="145" class="label-text" font-size="34">p53</text>
@@ -127,8 +127,8 @@
         <g transform="translate(116, 200)">
           <circle r="96" fill="#2563eb" filter="drop-shadow(0px 4px 6px rgba(37,99,235,0.3))" />
           <text class="node-text" font-size="24">
-            <tspan x="0" dy="-0.6em">Pre-beta</tspan>
-            <tspan x="0" dy="1.2em">cells</tspan>
+            <tspan x="0" dy="-0.6em">Pre</tspan>
+            <tspan x="0" dy="1.2em">beta-cells</tspan>
           </text>
         </g>
 
@@ -136,8 +136,8 @@
         <g transform="translate(624, 200)">
           <circle r="96" fill="#2563eb" filter="drop-shadow(0px 4px 6px rgba(37,99,235,0.3))" />
           <text class="node-text" font-size="24">
-            <tspan x="0" dy="-0.6em">Meta-beta</tspan>
-            <tspan x="0" dy="1.2em">cells</tspan>
+            <tspan x="0" dy="-0.6em">Meta</tspan>
+            <tspan x="0" dy="1.2em">beta-cells</tspan>
           </text>
         </g>
 
@@ -145,14 +145,14 @@
         <g transform="translate(1112, 200)">
           <circle r="96" fill="#2563eb" filter="drop-shadow(0px 4px 6px rgba(37,99,235,0.3))" />
           <text class="node-text" font-size="24">
-            <tspan x="0" dy="-0.6em">Mature beta</tspan>
-            <tspan x="0" dy="1.2em">cells</tspan>
+            <tspan x="0" dy="-0.6em">Mature</tspan>
+            <tspan x="0" dy="1.2em">beta-cells</tspan>
           </text>
         </g>
 
         <!-- Node D -->
         <g transform="translate(624, 610)">
-          <circle r="110" fill="#16a34a" filter="drop-shadow(0px 4px 6px rgba(22,163,74,0.3))" />
+          <circle r="110" fill="#FF0000" filter="drop-shadow(0px 4px 6px rgba(22,163,74,0.3))" />
           <text class="node-text" font-size="21">
             <tspan x="0" dy="-1.2em">Fibrotic /</tspan>
             <tspan x="0" dy="1.2em">Cancer /</tspan>
