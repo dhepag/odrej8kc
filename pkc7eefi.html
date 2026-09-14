@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<title>MYC/MAX/MXD1</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #fafafa;
+    color: #222;
+  }
+
+  /* Custom styling for range input slider */
+  input[type=range] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    background: #e2e8f0;
+    border-radius: 5px;
+    outline: none;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #2563eb;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(37,99,235,0.4);
+    transition: transform 0.1s ease;
+  }
+
+  input[type=range]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+
+  input[type=range]::-moz-range-thumb {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #2563eb;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(37,99,235,0.4);
+    border: none;
+  }
+
+  /* SVG text styling */
+  .node-text {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 600;
+    fill: #000000;
+    text-anchor: middle;
+    dominant-baseline: central;
+    pointer-events: none;
+  }
+
+  .label-text {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-weight: 600;
+    fill: #4b5563;
+    text-anchor: middle;
+  }
+</style>
+</head>
+<!--<body class="min-h-screen flex flex-col items-center justify-start p-4 sm:p-6 md:p-10">-->
+<body     class="min-h-screen flex flex-col items-center justify-start p-10 overflow-x-auto">
+
+  <header class="w-full max-w-6xl text-center mb-1">
+    <!--<h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">-->
+    <h1 class="text-4xl                         font-bold text-gray-800 tracking-tight">
+      Proliferation Loci<br>
+    </h1>
+
+    <p>MYC/MAX E-box DNA elements (CACGTG)</p>
+
+
+    <!--<p class="text-base sm:text-lg text-gray-600 mt-2 max-w-xl mx-auto">-->
+    <p >
+      Drag the slider to change/adjust MYC or MXD1 levels.
+      dhepag model
+    </p>
+  </header>
+
+  <main class="w-full max-w-6xl flex flex-col items-center relative">
+
+
+
+
+
+<div style="position: absolute; left: 50%; top: 9.8%; z-index: 10;"
+
+     class="w-52 bg-white p-2 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center">
+
+  <div class="flex items-center justify-between w-full mb-1">
+    <label for="slider" class="text-sm font-semibold text-gray-700">MYC level/activity</label>
+
+    <span id="p53-readout"
+          class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">
+      50%
+    </span>
+  </div>
+
+  <input type="range"
+         id="slider"
+         min="0"
+         max="100"
+         value="50"
+         class="my-1 cursor-pointer touch-none">
+</div>
+
+
+
+
+<div style="position: absolute; left: 30%; top: 32%; z-index: 10;"
+     class="w-52 bg-white p-2 rounded-xl shadow-sm border border-gray-100 flex flex-col items-center">
+
+  <div class="flex items-center justify-between w-full mb-1">
+    <label for="slider2" class="text-sm font-semibold text-gray-700">MXD1 level/activity</label>
+
+    <span id="MXD1-readout"
+          class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">
+      50%
+    </span>
+  </div>
+
+  <input type="range"
+         id="slider2"
+         min="0"
+         max="100"
+         value="50"
+         class="my-1 cursor-pointer touch-none">
+</div>
+
+
+
+
+
+
+
+    <!--<div class="w-full rounded-2xl border border-gray-100 p-2 sm:p-4 overflow-hidden relative">-->
+    <div class="w-full rounded-2xl border border-gray-100 p-4        overflow-hidden relative">
+      <svg id="diagram" viewBox="0 0 1420 820" class="w-full h-auto max-w-full block">
+        <defs>
+          <marker id="arrowC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4.6" markerHeight="4.6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="#3b3b3b" />
+          </marker>
+        </defs>
+
+        <!-- Fixed line A -> B -->
+        <line id="lineAB" x1="180" y1="200" x2="340" y2="200" stroke="#4b5563" stroke-width="6" stroke-linecap="round" marker-start="url(#arrowC)" marker-end="url(#arrowC)" />
+
+        <!-- Dynamic line B -> C -->
+        <line id="lineBC" x1="480" y1="200" x2="640" y2="200" stroke="#4b5563" stroke-width="6" stroke-linecap="round" marker-start="url(#arrowC)" marker-end="url(#arrowC)" />
+
+        <!-- Dynamic line C -> D -->
+        <line id="lineCD" x1="780" y1="200" x2="940" y2="200" stroke="#4b5563" stroke-width="6" stroke-linecap="round" marker-start="url(#arrowC)" marker-end="url(#arrowC)" />
+
+        <!-- Dynamic line D -> E -->
+        <line id="lineDE" x1="1080" y1="200" x2="1240" y2="200" stroke="#4b5563" stroke-width="6" stroke-linecap="round" marker-start="url(#arrowC)" marker-end="url(#arrowC)" />
+
+
+        <!-- Dynamic label overlay near B->C pathway -->
+        <text x="240" y="240" class="label-text" font-size="34">SIN3</text>
+        <text x="540" y="240" class="label-text" font-size="34">MXD1</text>
+        <text x="840" y="180" class="label-text" font-size="34">MYC</text>
+        <text x="1140" y="180" class="label-text" font-size="34">SAGA</text>
+
+
+        <!-- Node A -->
+        <g transform="translate(100, 200)">
+          <circle id="nodeA" r="60" fill="#2563eb" filter="drop-shadow(0px 4px 6px rgba(37,99,235,0.3))" />
+          <text class="node-text" font-size="14">
+            <tspan x="0" dy="-1em">Repressed</tspan>
+            <tspan x="0" dy="1em">condensed</tspan>
+            <tspan x="0" dy="1em">loci</tspan>
+          </text>
+        </g>
+
+        <!-- Node B -->
+        <g transform="translate(400, 200)">
+          <circle id="nodeB" r="60" fill="#2563eb" filter="drop-shadow(0px 4px 6px rgba(37,99,235,0.3))" />
+          <text class="node-text" font-size="24">
+            <tspan x="0" dy="-0.6em">MXD1</tspan>
+            <tspan x="0" dy="1.2em">MAX</tspan>
+          </text>
+        </g>
+
+        <!-- Node C -->
+        <g transform="translate(700, 200)">
+          <circle id="nodeC" r="60" fill="#2563eb" filter="drop-shadow(0px 4px 6px rgba(37,99,235,0.3))" />
+          <text class="node-text" font-size="24">
+            <tspan x="0" dy="0em">MAX </tspan>
+          </text>
+        </g>
+
+        <!-- Node D -->
+        <g transform="translate(1000, 200)">
+          <circle id="nodeD" r="60" fill="#2563eb" filter="drop-shadow(0px 4px 6px rgba(22,163,74,0.3))" />
+          <text class="node-text" font-size="30">
+            <tspan x="0" dy="-1.0em">MYC</tspan>
+            <tspan x="0" dy="1.0em">MAX</tspan>
+          </text>
+        </g>
+
+
+        <!-- Node E -->
+        <g transform="translate(1300, 200)">
+          <circle id="nodeE" r="60" fill="#2563eb" filter="drop-shadow(0px 4px 6px rgba(22,163,74,0.3))" />
+          <text class="node-text" font-size="18">
+            <tspan x="0" dy="-1.0em">Activated</tspan>
+            <tspan x="0" dy="1.0em">open</tspan>
+            <tspan x="0" dy="1.0em">loci</tspan>
+          </text>
+        </g>
+
+
+
+      </svg>
+    </div>
+
+
+
+  </main>
+
+<script>
+  const slider = document.getElementById('slider');
+  const slider2 = document.getElementById('slider2');
+
+
+  const nodeA = document.getElementById('nodeA');
+  const nodeB = document.getElementById('nodeB');
+  const nodeC = document.getElementById('nodeC');
+  const nodeD = document.getElementById('nodeD');
+  const nodeE = document.getElementById('nodeE');
+
+  const p53Readout = document.getElementById('p53-readout');
+  const mXD1Readout = document.getElementById('MXD1-readout');
+
+
+
+  /* Node A: gets smaller */
+  const NODE_A_MAX_R = 60;
+  const NODE_A_MIN_R = 30;
+
+  /* Node B: gets smaller */
+  const NODE_B_MAX_R = 60;
+  const NODE_B_MIN_R = 30;
+
+  /* Node C: gets larger */
+  const NODE_C_MIN_R = 60;
+  const NODE_C_MAX_R = 90;
+
+  /* Node D: gets larger */
+  const NODE_D_MIN_R = 30;
+  const NODE_D_MAX_R = 90;
+
+  /* Node E: gets larger */
+  const NODE_E_MIN_R = 30;
+  const NODE_E_MAX_R = 90;
+
+  function update() {
+    const val1 = Number(slider.value);
+    const val2 = Number(slider2.value);
+    const t1 = val1 / 40;
+    const t2 = val2 / 40;
+    const t = Math.min(1, Math.max(0, (t1 - t2 + 1) / 2));
+
+
+
+    /* Node B gets smaller as slider increases */
+    const radiusA = NODE_A_MAX_R - t * (NODE_A_MAX_R - NODE_A_MIN_R);
+
+    /* Node B gets smaller as slider increases */
+    const radiusB = NODE_B_MAX_R - t * (NODE_B_MAX_R - NODE_B_MIN_R);
+
+    /* Node C gets larger as slider increases */
+
+    const deltaC = (t1 - 0.5) + (t2 - 0.5);
+    const radiusC = 75 - deltaC * 30;
+
+    /* Node C gets larger as slider increases */
+    const radiusD = NODE_D_MIN_R + t * (NODE_D_MAX_R - NODE_D_MIN_R);
+
+    /* Node C gets larger as slider increases */
+    const radiusE = NODE_E_MIN_R + t * (NODE_E_MAX_R - NODE_E_MIN_R);
+
+    nodeA.setAttribute('r', radiusA.toFixed(1));
+    nodeB.setAttribute('r', radiusB.toFixed(1));
+    nodeC.setAttribute('r', radiusC.toFixed(1));
+    nodeD.setAttribute('r', radiusD.toFixed(1));
+    nodeE.setAttribute('r', radiusE.toFixed(1));
+
+    /* Percentage readout */
+    p53Readout.textContent = `${val1}%`;
+    mXD1Readout.textContent = `${val2}%`;
+
+  }
+
+  slider.addEventListener('input', update);
+  slider2.addEventListener('input', update);
+
+
+  update();
+</script>
+
+
+
+</body>
+</html>
